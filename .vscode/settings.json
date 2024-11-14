@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "bitset": "cpp",
+        "iostream": "cpp"
+    },
+    "cmake.sourceDirectory": "/Users/asuad/workplace/DataStruct_Class/sort"
+}

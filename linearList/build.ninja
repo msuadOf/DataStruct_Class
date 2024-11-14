@@ -1,0 +1,4 @@
+rule mkdir_build
+  command = mkdir -p build && cd build && cmake .. -G Ninja && ninja run
+
+build all: mkdir_build

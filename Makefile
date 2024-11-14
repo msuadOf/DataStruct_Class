@@ -1,18 +1,22 @@
-BUILD_TOOL?=ninja
-# BUILD_TOOL?=make
-all:init
-	@ cd build && ${BUILD_TOOL}
+TARGET?=binaryTree #linearList 
+all: $(patsubst %,all_%,$(TARGET))
 
-run:init
-	@ cd build && ${BUILD_TOOL} run
+all_%:
+	@$(MAKE) -C $*
 
-init:${BUILD_TOOL}_init
-ninja_init:
-	mkdir -p build 
-	cd build && cmake .. -G Ninja 
-make_init:
-	mkdir -p build 
-	cd build && cmake .. 
+run: $(patsubst %,run_%,$(TARGET))
 
-clean:
-	rm -rf ./build
+run_%:
+	@$(MAKE) -C $* run
+
+# 定义一个伪目标来遍历真实目标并执行它们
+test: $(patsubst %,test_%,$(TARGET))
+
+# 使用模式规则为每个目标创建一个测试规则
+test_%:
+	@$(MAKE) -C $* test
+
+clean: $(patsubst %,clean_%,$(TARGET))
+
+clean_%:
+	@$(MAKE) -C $* clean
